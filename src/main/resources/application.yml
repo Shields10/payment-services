@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    username: ${db_username}
+    password: ${db_password}
+    url: ${db_url}
+  jpa:
+    database: mysql
+    database-platform: org.springframework.orm.jpa.vendor.Database.MYSQL
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+server:
+  port: ${port}
