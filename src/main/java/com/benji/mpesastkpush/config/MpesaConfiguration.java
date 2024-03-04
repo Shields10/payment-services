@@ -14,10 +14,14 @@ public class MpesaConfiguration {
     private String grantType;
     private String oauthEndpoint;
     private String registerUrlEndpoint;
+    private String stkPushEndpoint;
     private String shortCode;
     private String responseType;
     private String confirmationUrl;
     private String validationUrl;
+    private String stkPassKey;
+    private String stkPushShortCode;
+    private String stkPushRequestCallbackUrl;
 
     @Override
     public String toString() {
