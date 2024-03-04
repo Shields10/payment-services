@@ -7,7 +7,7 @@ import lombok.Data;
 public class ItemItem{
 
 	@JsonProperty("Value")
-	private Object value;
+	private String value;
 
 	@JsonProperty("Name")
 	private String name;

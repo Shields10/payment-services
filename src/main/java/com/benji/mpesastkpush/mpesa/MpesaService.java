@@ -1,10 +1,7 @@
 package com.benji.mpesastkpush.mpesa;
 
 
-import com.benji.mpesastkpush.mpesa.dto.AccessTokenResponse;
-import com.benji.mpesastkpush.mpesa.dto.InternalStkPushRequest;
-import com.benji.mpesastkpush.mpesa.dto.RegisterUrlResponse;
-import com.benji.mpesastkpush.mpesa.dto.StkPushSyncResponse;
+import com.benji.mpesastkpush.mpesa.dto.*;
 
 public interface MpesaService {
 
@@ -14,4 +11,5 @@ public interface MpesaService {
 
     StkPushSyncResponse performStkPushTransaction(InternalStkPushRequest internalStkPushRequest);
 
+    void saveStkEntry(StkPushAsyncResponse stkPushAsyncResponse);
 }

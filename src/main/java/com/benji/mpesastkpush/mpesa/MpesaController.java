@@ -1,9 +1,6 @@
 package com.benji.mpesastkpush.mpesa;
 
-import com.benji.mpesastkpush.mpesa.dto.AccessTokenResponse;
-import com.benji.mpesastkpush.mpesa.dto.InternalStkPushRequest;
-import com.benji.mpesastkpush.mpesa.dto.RegisterUrlResponse;
-import com.benji.mpesastkpush.mpesa.dto.StkPushSyncResponse;
+import com.benji.mpesastkpush.mpesa.dto.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -26,7 +23,6 @@ public class MpesaController {
     }
     @PostMapping(value = "/register",produces = "application/json")
     public ResponseEntity<RegisterUrlResponse> registerUrl(){
-
         return ResponseEntity.ok(mpesaService.registerUrl());
     }
 
@@ -37,10 +33,14 @@ public class MpesaController {
 
     @SneakyThrows
     @PostMapping(value = "/stk-transaction-result",produces = "application/json")
-    public ResponseEntity<String> getTransactionResult (@RequestBody StkPushSyncResponse stkPushSyncResponse){
-
+    public ResponseEntity<String> getTransactionResult (@RequestBody StkPushAsyncResponse stkPushAsyncResponse){
         log.info("STk Push Async Response===");
-        log.info(objectMapper.writeValueAsString(stkPushSyncResponse));
+        log.info(objectMapper.writeValueAsString(stkPushAsyncResponse));
+        log.info(String.format("response code is %s",stkPushAsyncResponse.getBody().getStkCallback().getResultCode()));
+        // Save Stk Entries if response is success
+        if (stkPushAsyncResponse.getBody().getStkCallback().getResultCode() == 0) {
+            mpesaService.saveStkEntry(stkPushAsyncResponse);
+        }
        return ResponseEntity.ok("success");
     }
 
