@@ -23,3 +23,8 @@ mpesa:
       consumer-secret: ${mpesa_consumer_secret}
       grant-type: client_credentials
       oauth-endpoint: https://sandbox.safaricom.co.ke/oauth/v1/generate
+      register-url-endpoint: https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl
+      shortCode: 8135454
+      responseType: Completed
+      confirmation-url: https://master-lacewing-genuine.ngrok-free.app/mobile-money/confirmation
+      validation-url: https://master-lacewing-genuine.ngrok-free.app/mobile-money/validation
