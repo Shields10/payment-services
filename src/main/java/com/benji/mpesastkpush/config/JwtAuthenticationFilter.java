@@ -28,7 +28,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
-        final String userName; // User name is contact
+        final String userName;
 
 
         if (authHeader==null || !authHeader.startsWith(("Bearer "))){
@@ -37,7 +37,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         // Extract token from auth header
         jwt = authHeader.substring(7); // The token will be after the bearer
-        userName =jwtService.extractUserName(jwt);  //  extract the user contact from JWT token;
+        userName =jwtService.extractUserName(jwt);
+
          if (userName!=null && SecurityContextHolder.getContext().getAuthentication()==null){
              UserDetails userDetails = this.userDetailsService.loadUserByUsername(userName);
 
