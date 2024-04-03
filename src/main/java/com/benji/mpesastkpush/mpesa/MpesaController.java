@@ -1,6 +1,7 @@
 package com.benji.mpesastkpush.mpesa;
 
 import com.benji.mpesastkpush.mpesa.dto.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -31,11 +32,15 @@ public class MpesaController {
         return ResponseEntity.ok(mpesaService.performStkPushTransaction(internalStkPushRequest));
     }
 
-    @SneakyThrows
+
     @PostMapping(value = "/stk-transaction-result",produces = "application/json")
     public ResponseEntity<String> getTransactionResult (@RequestBody StkPushAsyncResponse stkPushAsyncResponse){
         log.info("STk Push Async Response===");
-        log.info(objectMapper.writeValueAsString(stkPushAsyncResponse));
+        try {
+            log.info(objectMapper.writeValueAsString(stkPushAsyncResponse));
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
         log.info(String.format("response code is %s",stkPushAsyncResponse.getBody().getStkCallback().getResultCode()));
         // Save Stk Entries if response is success
         if (stkPushAsyncResponse.getBody().getStkCallback().getResultCode() == 0) {

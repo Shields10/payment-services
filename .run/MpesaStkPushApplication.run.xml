@@ -1,0 +1,24 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="MpesaStkPushApplication" type="Application" factoryName="Application" nameIsGenerated="true">
+    <envs>
+      <env name="db_password" value="vcuser123" />
+      <env name="db_url" value="jdbc:mysql://localhost:3306/mpesa-stk-push" />
+      <env name="db_username" value="vcuser" />
+      <env name="mpesa_consumer_key" value="QIH6E0VVDjXjC2MrRo35KYzIM3gnAA1uk89rMJwkvBmfkvTN" />
+      <env name="port" value="8080" />
+      <env name="mpesa_consumer_secret" value="ACkug68wVa9fSl5AmUTTF7VnEks7KXqIVD23YnHOnabcAdOHO3DBIU6jLaRGgXlj" />
+      <env name="stk_passkey" value="bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="com.benji.mpesastkpush.MpesaStkPushApplication" />
+    <module name="mpesa-stk-push" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.benji.mpesastkpush.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

@@ -20,4 +20,5 @@ public class StkCallback{
 
 	@JsonProperty("CallbackMetadata")
 	private CallbackMetadata callbackMetadata;
+
 }

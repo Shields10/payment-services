@@ -29,6 +29,7 @@ mpesa:
       response-type: Completed
       confirmation-url: https://master-lacewing-genuine.ngrok-free.app/api/v1/mobile-money/confirmation
       validation-url: https://master-lacewing-genuine.ngrok-free.app/api/v1/mobile-money/validation
-      stk-push-passkey: ${stk_passkey}
-      stk-push-business-code: 174379
-      stk-push-callback-url: https://master-lacewing-genuine.ngrok-free.app/api/v1/mobile-money/stk-transaction-result
+      stk-passkey: ${stk_passkey}
+      stk-push-short-code: 174379
+      stk-push-request-callback-url: https://master-lacewing-genuine.ngrok-free.app/api/v1/mobile-money/stk-transaction-result
+

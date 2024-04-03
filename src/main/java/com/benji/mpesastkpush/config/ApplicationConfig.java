@@ -1,7 +1,9 @@
 package com.benji.mpesastkpush.config;
 
 import com.benji.mpesastkpush.user.UserRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import okhttp3.OkHttpClient;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,10 +43,14 @@ public class ApplicationConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+    @Bean
+    public OkHttpClient getOkHttpClient() {
+        return new OkHttpClient();
+    }
 
     @Bean
-    public RestTemplate restTemplate(RestTemplateBuilder builder) {
-        // Do any additional configuration here
-        return builder.build();
+    public ObjectMapper getObjectMapper() {
+        return new ObjectMapper();
     }
+
 }
