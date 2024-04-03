@@ -11,10 +11,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 
@@ -118,10 +114,7 @@ public class MpesaServiceImpl implements MpesaService {
 
             log.info("external stk push "+externalStkPushRequest);
             AccessTokenResponse accessTokenResponse = getAccessToken();
-            HttpHeaders httpHeaders = new HttpHeaders();
-            httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-            httpHeaders.set("Authorization", String.format("%s %s",
-                    BEARER_AUTH_STRING, accessTokenResponse.getAccessToken()));
+
             RequestBody body = RequestBody.create(JSON_MEDIA_TYPE,
                     Objects.requireNonNull(HelperUtility.toJson(externalStkPushRequest)));
             Request request = new Request.Builder()
