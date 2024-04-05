@@ -38,9 +38,9 @@ public class JwtService {
     }
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails){
         Date now = new Date();
-        log.info("Date is now" + now);
+        //log.info("Date is now" + now);
         Date expiryDate = new Date(now.getTime() + 24 * 60 * 60 * 1000); // Expiry in 24 hours
-        log.info("expiryDate" + expiryDate);
+       // log.info("expiryDate" + expiryDate);
 
         return Jwts.builder()
                 .setClaims(extraClaims)

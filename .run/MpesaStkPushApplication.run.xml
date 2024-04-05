@@ -5,8 +5,8 @@
       <env name="db_url" value="jdbc:mysql://localhost:3306/mpesa-stk-push" />
       <env name="db_username" value="vcuser" />
       <env name="env_secret_key" value="QHzOT0y3py7LJz2p8oRTr7Y9mhPbGIDJ+wqYX6CdlXZTpQF5ZgeWoTkTFdDBwlpT" />
-      <env name="mpesa_consumer_key" value="QIH6E0VVDjXjC2MrRo35KYzIM3gnAA1uk89rMJwkvBmfkvTN" />
-      <env name="mpesa_consumer_secret" value="ACkug68wVa9fSl5AmUTTF7VnEks7KXqIVD23YnHOnabcAdOHO3DBIU6jLaRGgXlj" />
+      <env name="mpesa_consumer_key" value="y9udEWaaYlWrk2M7Vd1ODngLOs3NIkYOPhcBeBNiNABB221w" />
+      <env name="mpesa_consumer_secret" value="xAREvIqOdP7Bc8vPKI2dQf3Zl94yKEtujGLJzbVmxnlXNgKh5nlEE3MErEwVIPew" />
       <env name="port" value="8080" />
       <env name="stk_passkey" value="bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919" />
     </envs>
