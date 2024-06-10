@@ -9,12 +9,13 @@
       <env name="mpesa_consumer_secret" value="xAREvIqOdP7Bc8vPKI2dQf3Zl94yKEtujGLJzbVmxnlXNgKh5nlEE3MErEwVIPew" />
       <env name="port" value="8080" />
       <env name="stk_passkey" value="bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919" />
+      <env name="env_stripe_api_key" value="sk_test_51PLTYwITGTWux566zVw4Q1XTXM2L0G5eIwg7jonKpHGqi2Hp7ck7sSQWcopyWDTvha0s5PQELK20qyAjiGWBbgPt00FV2oY52M" />
     </envs>
-    <option name="MAIN_CLASS_NAME" value="com.benji.mpesastkpush.MpesaStkPushApplication" />
-    <module name="mpesa-stk-push" />
+    <option name="MAIN_CLASS_NAME" value="com.benji.payments_services.MpesaStkPushApplication" />
+    <module name="payments-services" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="com.benji.mpesastkpush.*" />
+        <option name="PATTERN" value="com.benji.payments_services.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

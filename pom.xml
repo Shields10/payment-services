@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.benji</groupId>
-	<artifactId>mpesa-stk-push</artifactId>
+	<artifactId>payments-services</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>mpesa-stk-push</name>
 	<description>Mpesa service for initiating an Stk push to a user</description>
@@ -75,6 +75,11 @@
 			<groupId>com.squareup.okhttp3</groupId>
 			<artifactId>okhttp</artifactId>
 			<version>4.12.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.stripe</groupId>
+			<artifactId>stripe-java</artifactId>
+			<version>25.11.0</version>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>

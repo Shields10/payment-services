@@ -34,3 +34,5 @@ mpesa:
       stk-push-request-callback-url: https://master-lacewing-genuine.ngrok-free.app/api/v1/mobile-money/stk-transaction-result
 environment:
       secret_key: ${env_secret_key}
+      stripe_api_key: ${env_stripe_api_key}
+
