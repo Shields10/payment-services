@@ -7,7 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 class PaymentServiceApplicationTests {
 	@Test
 	void contextLoads() {
-		System.out.println("Hello world");
+		System.out.println("Loading test");
 	}
 
 }

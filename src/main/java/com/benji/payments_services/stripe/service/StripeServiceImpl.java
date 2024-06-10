@@ -1,8 +1,13 @@
 package com.benji.payments_services.stripe.service;
 
+import com.benji.payments_services.stripe.dto.StripeChargeRequest;
 import com.benji.payments_services.stripe.dto.StripeToken;
+import com.benji.payments_services.utility.HelperUtility;
+import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.model.Charge;
 import com.stripe.model.Token;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -14,12 +19,15 @@ import java.util.Map;
 @Slf4j
 public class StripeServiceImpl implements StripeService {
 
+
     @Value("${environment.stripe_api_key}")
     private String STRIPE_API_KEY;
 
     @Override
-    public StripeToken createCardToken(StripeToken stripeTokenDetails) {
+    public StripeToken generateToken(StripeToken stripeTokenDetails) {
         try{
+            Stripe.apiKey = STRIPE_API_KEY;
+
             Map<String, Object> cardDetails= new HashMap<>();
             cardDetails.put("number",stripeTokenDetails.getCardNumber());
             cardDetails.put("exp_month",Integer.parseInt(stripeTokenDetails.getExpiryMonth()));
@@ -36,7 +44,33 @@ public class StripeServiceImpl implements StripeService {
             }
             return stripeTokenDetails;
         }catch (StripeException e) {
-            log.error("Error in creating token", e);
+            log.error(String.format("Error in creating token: %s", e.getMessage()));
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+    public StripeChargeRequest charge(StripeChargeRequest chargeRequest) {
+        try {
+            Stripe.apiKey = STRIPE_API_KEY;
+            chargeRequest.setSuccess(false);
+            Map<String, Object> chargeParams = new HashMap<>();
+            chargeParams.put("currency", "USD");
+            chargeParams.put("amount", (int) (chargeRequest.getAmount()*100)); // What does this do?
+            chargeParams.put("description", "Payment for id " + chargeRequest.getAdditionalInfo().
+                    getOrDefault("ID_TAG", HelperUtility.generateTransactionUniqueNo()));
+            chargeParams.put("source", chargeRequest.getStripeToken());
+
+            Map<String, Object> metaData = new HashMap<>();
+            metaData.put("id", chargeRequest.getChargeId());
+            metaData.putAll(chargeRequest.getAdditionalInfo());
+            chargeParams.put("metadata", metaData);
+            Charge charge = Charge.create(chargeParams);
+            if (charge.getPaid()) {
+                chargeRequest.setChargeId(charge.getId());
+                chargeRequest.setSuccess(true);
+            }
+            return chargeRequest;
+        } catch (StripeException e) {
+            log.error(String.format("Error in charge service: %s", e.getMessage()));
             throw new RuntimeException(e.getMessage());
         }
     }
