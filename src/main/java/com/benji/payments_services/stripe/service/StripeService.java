@@ -6,6 +6,6 @@ import com.benji.payments_services.stripe.dto.StripeToken;
 
 public interface StripeService {
 
-    public StripeToken generateToken(StripeToken stripeToken);
-    public StripeChargeRequest charge(StripeChargeRequest chargeRequest);
+     StripeToken generateToken(StripeToken stripeToken);
+     StripeChargeRequest charge(StripeChargeRequest chargeRequest);
 }
