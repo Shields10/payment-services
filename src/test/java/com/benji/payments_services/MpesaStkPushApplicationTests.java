@@ -5,8 +5,8 @@ import org.springframework.test.context.ContextConfiguration;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@ContextConfiguration(classes = MpesaStkPushApplication.class)
-class MpesaStkPushApplicationTests {
+@ContextConfiguration(classes = PaymentServiceApplication.class)
+class PaymentServiceApplicationTests {
 	@Test
 	void contextLoads() {
 		System.out.println("Hello world");
