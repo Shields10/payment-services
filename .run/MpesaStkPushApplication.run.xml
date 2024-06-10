@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="MpesaStkPushApplication" type="Application" factoryName="Application" nameIsGenerated="true">
+  <configuration default="false" name="PaymentServiceApplication" type="Application" factoryName="Application" nameIsGenerated="true">
     <envs>
       <env name="db_password" value="vcuser123" />
       <env name="db_url" value="jdbc:mysql://localhost:3306/mpesa-stk-push" />
