@@ -1,6 +1,8 @@
 package com.benji.payments_services.stripe.controller;
 
 import com.benji.payments_services.stripe.dto.StripeChargeRequest;
+import com.benji.payments_services.stripe.dto.StripeSubscriptionRequest;
+import com.benji.payments_services.stripe.dto.StripeSubscriptionResponse;
 import com.benji.payments_services.stripe.dto.StripeToken;
 import com.benji.payments_services.stripe.service.StripeService;
 import lombok.RequiredArgsConstructor;
@@ -20,5 +22,8 @@ public class StripeController {
     @PostMapping(value = "/charge",produces = "application/json")
     public StripeChargeRequest charge(@RequestBody StripeChargeRequest stripeChargeRequest){
         return stripeService.charge(stripeChargeRequest);
+    } @PostMapping(value = "/customer-subscription",produces = "application/json")
+    public StripeSubscriptionResponse customerSubscribe(@RequestBody StripeSubscriptionRequest stripeSubscriptionRequest){
+        return stripeService.createSubscription(stripeSubscriptionRequest);
     }
 }
