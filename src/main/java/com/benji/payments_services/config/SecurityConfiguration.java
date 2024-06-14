@@ -25,7 +25,11 @@ public class SecurityConfiguration {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 . authorizeHttpRequests(req ->
-                   req.requestMatchers("/api/v1/auth/**","/api/v1/mobile-money/stk-transaction-result")
+                   req.requestMatchers("/api/v1/auth/**",
+                                   "/api/v1/mobile-money/stk-transaction-result",
+                                   "/v3/api-docs/**",
+                                   "/swagger-ui/**",
+                                   "/swagger-ui.html")
                     .permitAll()
                     .anyRequest()
                     .authenticated()
