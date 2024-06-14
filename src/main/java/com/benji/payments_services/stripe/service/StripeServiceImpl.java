@@ -178,4 +178,15 @@ public class StripeServiceImpl implements StripeService {
             throw new RuntimeException(e.getMessage());
         }
     }
+
+    @Override
+    public Subscription cancelSubscription(String subscriptionId) {
+        try{
+            Subscription retrieve = Subscription.retrieve(subscriptionId);
+            return retrieve.cancel();
+        }catch (StripeException e){
+            log.error(String.format("Error in cancelSubscription : %s", e.getMessage()));
+        }
+        return  null;
+    }
 }
