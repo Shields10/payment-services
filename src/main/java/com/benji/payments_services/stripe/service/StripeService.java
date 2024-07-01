@@ -1,10 +1,7 @@
 package com.benji.payments_services.stripe.service;
 
 
-import com.benji.payments_services.stripe.dto.StripeChargeRequest;
-import com.benji.payments_services.stripe.dto.StripeSubscriptionRequest;
-import com.benji.payments_services.stripe.dto.StripeSubscriptionResponse;
-import com.benji.payments_services.stripe.dto.StripeToken;
+import com.benji.payments_services.stripe.dto.*;
 import com.stripe.model.Subscription;
 
 public interface StripeService {
@@ -15,4 +12,7 @@ public interface StripeService {
      StripeSubscriptionResponse createSubscription (StripeSubscriptionRequest stripeSubscriptionRequest);
 
      Subscription cancelSubscription (String subscriptionId);
+
+     SessionDto createPaymentSession(SessionDto session);
+
 }

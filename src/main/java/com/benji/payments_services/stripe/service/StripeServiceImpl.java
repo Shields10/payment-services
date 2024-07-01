@@ -1,17 +1,17 @@
 package com.benji.payments_services.stripe.service;
 
-import com.benji.payments_services.stripe.dto.StripeChargeRequest;
-import com.benji.payments_services.stripe.dto.StripeSubscriptionRequest;
-import com.benji.payments_services.stripe.dto.StripeSubscriptionResponse;
-import com.benji.payments_services.stripe.dto.StripeToken;
+import com.benji.payments_services.stripe.dto.*;
 import com.benji.payments_services.utility.HelperUtility;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.*;
+import com.stripe.model.checkout.Session;
+import com.stripe.param.checkout.SessionCreateParams;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -188,5 +188,49 @@ public class StripeServiceImpl implements StripeService {
             log.error(String.format("Error in cancelSubscription : %s", e.getMessage()));
         }
         return  null;
+    }
+
+    @Override
+    public SessionDto createPaymentSession(SessionDto sessionDto) {
+        try{
+            double amount = 20.00; // 2000
+            String clientURL="example.com";
+            Stripe.apiKey = STRIPE_API_KEY;
+            SessionCreateParams.Builder sessionCreateParamsBuilder  = SessionCreateParams.builder()
+                    .setMode(SessionCreateParams.Mode.PAYMENT)
+                    .setCustomer("")
+                    .setSuccessUrl(clientURL+"/success?session_is={CHECKOUT_SESSION_ID}")
+                    .setCancelUrl(clientURL+"/failure");
+            // Add item and amount
+            sessionCreateParamsBuilder .addLineItem(
+                    SessionCreateParams.LineItem.builder()
+                            .setQuantity(1L)
+                            .setPriceData(SessionCreateParams.LineItem.PriceData.builder()
+                                    .setProductData(SessionCreateParams.LineItem.PriceData.ProductData.builder()
+                                            .putMetadata("app_data","123")
+                                            .putMetadata("user_id", sessionDto.getUserId())
+                                            .setName("Purchase")
+                                            .build()
+                            )
+                            .setCurrency("KES")
+                            .setUnitAmountDecimal(BigDecimal.valueOf(amount*100))
+                            .build())
+                            .build()
+            ).build();
+
+            SessionCreateParams.PaymentIntentData paymentIntentData =
+                    SessionCreateParams.PaymentIntentData.builder()
+                            .putMetadata("app_data","123")
+                            .putMetadata("user_id", sessionDto.getUserId())
+                            .build();
+            sessionCreateParamsBuilder.setPaymentIntentData(paymentIntentData);
+            Session session = Session.create(sessionCreateParamsBuilder.build());
+            sessionDto.setSessionUrl(session.getUrl());
+            sessionDto.setSessionId(session.getId());
+
+        }catch (StripeException e){
+            log.error(String.format("Error in createPaymentSession : %s", e.getMessage()));
+        }
+        return sessionDto;
     }
 }
